@@ -8,6 +8,8 @@ Decisions
  requires a highly responsive design
  takes a list of traffic boards, combines their information and dedups
  don't refresh page
+ use jquery, everyone here is familiar with it
+ deploy target matters a lot less because of jquery
 
  pros
  simple, fast, easy to write, easy to deliver, more reliable, more secure than a server-side solution
@@ -15,8 +17,3 @@ Decisions
 
  cons
  History would be shorter, but we'd only have to wait 5 minutes before we had two values for a trend
-
-Questions
- vanillaJS, simple, fast and future proof vs. jQuery vs. Ember
- What is our deploy target? Recent version of chrome?
-
