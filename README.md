@@ -10,6 +10,7 @@ Decisions
  don't refresh page
  use jquery, everyone here is familiar with it
  deploy target matters a lot less because of jquery
+ page is refreshed every ~5 mins, use local storage to persist data
 
  pros
  simple, fast, easy to write, easy to deliver, more reliable, more secure than a server-side solution
