@@ -1,0 +1,82 @@
+
+html, body {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+body {
+	background-color: #222;
+	color: #FFF;
+	font-family: arial;
+	font-size: 5em;
+}
+a,
+a:visited {
+	color: #666;
+	text-decoration: none;
+}
+.mins_col, .trend_col {
+	text-align: center;
+	padding-left: .5em;
+}
+.route_col {
+	padding-left: .5em;
+}
+.trend_col {
+	padding-right: .5em;
+}
+th {
+	font-weight: normal;
+	color: #AAA;
+	text-align: left;
+	font-size: 70%;
+}
+td {
+	font-weight: bold;
+}
+.fa-chevron-up, .danger {
+	color: #C30;
+}
+.fa-chevron-down, .success {
+	color: #0A0;
+}
+.fa-minus, .warning {
+	color: #CA0;
+}
+
+.cool {
+	color: #5295CF;
+}
+.warm {
+	color: #754298;
+}
+.hot {
+	color: #AD3036;
+}
+
+.full {
+	width: 100%;
+	height: 100%;
+	border-collapse: collapse;
+}
+.full tr:nth-child(even) {
+	background-color: #000000;
+}
+
+.switcher {
+	font-size: .2em;
+	font-weight: normal;
+}
+.switcher a {
+	margin-left: 1em;
+}
+.past {
+	opacity: 0.7;
+}
+.past2 {
+	opacity: 0.4;
+}
+.unit {
+	font-size: 70%;
+	font-weight: normal;
+}
