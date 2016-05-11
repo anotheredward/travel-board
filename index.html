@@ -24,11 +24,9 @@
 </html>
 
 <script type="application/javascript">
-  function getChevron(previousTime, currentTime) {
-    if (previousTime < currentTime) return '<i class="fa fa-chevron-up"></i>'
-    if (previousTime > currentTime) return '<i class="fa fa-chevron-down"></i>'
-    return ''
-  }
+  $('.travel-list').append(
+    generateRow('Airport', 30, 15)
+  )
 
   //Schema {name, time}
   function generateRow(name, previousTime, currentTime) {
@@ -39,7 +37,9 @@
   </tr>`
   }
 
-  $('.travel-list').append(
-    generateRow('Airport', 30, 15)
-  )
+  function getChevron(previousTime, currentTime) {
+    if (previousTime < currentTime) return '<i class="fa fa-chevron-up"></i>'
+    if (previousTime > currentTime) return '<i class="fa fa-chevron-down"></i>'
+    return ''
+  }
 </script>
