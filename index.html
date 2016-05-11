@@ -5,46 +5,30 @@
   <title>Travel Information Sign</title>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" type="text/css" href="sign.css">
+  <script src="https://code.jquery.com/jquery-2.2.3.min.js"
+  integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="
+  crossorigin="anonymous">
+  </script>
 </head>
 <body>
 
-<table class="full" >
+<table class="full travel-list" >
   <tr>
     <th class="route_col">From Greenlane to</th>
     <th class="mins_col">Mins</th>
     <th class="trend_col"></th>
   </tr>
-  <tr>
-    <td class="route_col">Airport</td>
-    <td class="mins_col">15</td>
-    <td class="trend_col"><i class="fa fa-chevron-up"></i></td>
-  </tr>
-  <tr>
-    <td class="route_col">Ellerslie</td>
-    <td class="mins_col">22</td>
-    <td class="trend_col"><i class="fa fa-chevron-down"></i></td>
-  </tr>
-  <tr>
-    <td class="route_col">Epsom</td>
-    <td class="mins_col">21</td>
-    <td class="trend_col"></td>
-  </tr>
-  <tr>
-    <td class="route_col">Ponsonby</td>
-    <td class="mins_col">32</td>
-    <td class="trend_col"><i class="fa fa-chevron-down"></i></td>
-  </tr>
-  <tr>
-    <td class="route_col">North Shore</td>
-    <td class="mins_col">38</td>
-    <td class="trend_col"><i class="fa fa-chevron-down"></i></td>
-  </tr>
-  <tr>
-    <td class="route_col">Waterview</td>
-    <td class="mins_col">16</td>
-    <td class="trend_col"></td>
-  </tr>
 </table>
 
 </body>
 </html>
+
+<script type="application/javascript">
+  $('.travel-list').append(
+  `<tr>
+    <td class="route_col">Airport</td>
+    <td class="mins_col">15</td>
+    <td class="trend_col"><i class="fa fa-chevron-up"></i></td>
+  </tr>`
+  )
+</script>
