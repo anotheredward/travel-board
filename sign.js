@@ -31,7 +31,7 @@ function getItems (sign) {
 
 function update (items) {
   $('.travel-list').empty()
-  const str = R.join('', R.map(item => generateRow(item.name, item.time, item.time + 5), items))
+  const str = R.join('', R.map(item => generateRow(item.name, parseInt(item.time, 10) + 5, item.time), items))
   $('.travel-list').append(str)
 }
 
