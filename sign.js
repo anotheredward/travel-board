@@ -7,6 +7,12 @@ $.get('https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs
   function (data) {
     const json = $.xml2json(data)['#document']['response']
     const signs = $.makeArray(json.tim)
+    // simplify logic, filter signs first, disregard ids, should be able to reduce to a single pipeline
+    // A sign is [{ id, page}]
+    // A page can be undefined, Object containing a line, Array containing objects containing lines
+    // R.reject, then wrap all objects in arrays, then we can treat the whole thing as [[line]]
+    // A line can contain left/right OR a center key
+    // The left key contains the name, the right key contains the time
     const lines = R.map(sign => ({id: sign.id, items: getItems(sign)}), signs)
     const convertedSigns = R.filter(x => R.contains(parseInt(x.id, 10), SIGN_IDS), lines)
     const convertedItems = R.pipe(
