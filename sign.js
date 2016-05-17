@@ -1,38 +1,53 @@
 /* global $, R */
 
-const SIGN_IDS = [334, 335, 336]
+const SIGN_IDS = [
+  343, // undefined pages
+  350, // array of pages
+  334, // single page object
+]
+const loggedPipe = R.pipe(
+  R.intersperse(R.tap(x => console.log(x))),
+  R.apply(R.pipe)
+)
 
 
 $.get('https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs/tim/all',
   function (data) {
     const json = $.xml2json(data)['#document']['response']
     const signs = $.makeArray(json.tim)
+    const convertedItems = loggedPipe([
+      R.filter(isSelectedSign),
+
+      // convert pages to always be an array
+      R.reject(R.propEq('page', undefined)),
+      R.map(R.prop('page')),
+      R.map(page => R.isArrayLike(page) ? page : [page]), //Wrap in array if it's a single value
+
+      // convert lines to always be an array
+      R.reject(R.propEq('line', undefined)),
+      R.map(R.prop('line')),
+      R.map(line => R.isArrayLike(line) ? line : [line]),
+
+      // extract items from line objects
+      R.reject(x => x.left == null || x.right == null),
+      R.map(x => ({name: x.left, time: x.right})),
+
+      R.flatten,
+      R.uniqBy(R.prop('name'))
+      ])(signs)
     // simplify logic, filter signs first, disregard ids, should be able to reduce to a single pipeline
     // A sign is [{ id, page}]
     // A page can be undefined, Object containing a line, Array containing objects containing lines
     // R.reject, then wrap all objects in arrays, then we can treat the whole thing as [[line]]
     // A line can contain left/right OR a center key
     // The left key contains the name, the right key contains the time
-    const lines = R.map(sign => ({id: sign.id, items: getItems(sign)}), signs)
-    const convertedSigns = R.filter(x => R.contains(parseInt(x.id, 10), SIGN_IDS), lines)
-    const convertedItems = R.pipe(
-      R.uniqBy(R.prop('name')),
-      R.pluck('items'),
-      R.flatten
-    )(convertedSigns)
 
     update(convertedItems)
   }
 )
 
-function getItems (sign) {
-  const lines = R.path(['page', 'line'], sign)
-  if (!lines || lines.length === 0) return []
-
-  return R.pipe(
-    R.reject(x => x.left == null || x.right == null),
-    R.map(x => ({name: x.left, time: x.right}))
-  )(lines)
+function isSelectedSign (sign) {
+  return R.contains(parseInt(sign.id, 10), SIGN_IDS, sign)
 }
 
 function update (items) {
