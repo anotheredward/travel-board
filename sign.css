@@ -30,6 +30,7 @@ th {
 }
 td {
 	font-weight: bold;
+	text-transform: uppercase;
 }
 .fa-chevron-up, .danger {
 	color: #C30;
