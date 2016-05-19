@@ -1,7 +1,7 @@
 /* global $, R */
 
-const DELAY = 30 * 1000
-let currentRows = []
+var DELAY = 30 * 1000
+var currentRows = []
 
 update()
 window.setInterval(update, DELAY)

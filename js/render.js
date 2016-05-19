@@ -8,8 +8,8 @@ function render(currentRows, newRows) {
     + '<th class="trend_col"></th>'
     + '</tr>')
 
-  const formattedRows = newRows.map(function(row, key) {
-    const currentTime = R.path([key, 'time'], currentRows) || row.time
+  var formattedRows = newRows.map(function(row, key) {
+    var currentTime = R.path([key, 'time'], currentRows) || row.time
     return generateRow(row.name, currentTime, row.time)
   }).join('')
 

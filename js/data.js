@@ -1,5 +1,5 @@
 /* global $, R */
-const SIGN_IDS = [
+var SIGN_IDS = [
   369,
   642
 ]
@@ -9,11 +9,11 @@ function getRows(callback) {
     url: 'https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs/tim/all',
     cache: false
   }, function (data) {
-      const ids = '(' + SIGN_IDS.join(', ') + ')'
-      const query = '/response/tim[id=' + ids + ']/page/line/(left, right)'
-      const signs = $(data).xpath(query)
-      const lines = convertSignsToLines(signs)
-      const rows = R.pipe(
+      var ids = '(' + SIGN_IDS.join(', ') + ')'
+      var query = '/response/tim[id=' + ids + ']/page/line/(left, right)'
+      var signs = $(data).xpath(query)
+      var lines = convertSignsToLines(signs)
+      var rows = R.pipe(
         R.splitEvery(2),
         R.map(R.zipObj(['name', 'time']))
       )(lines)
