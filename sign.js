@@ -4,20 +4,28 @@ const SIGN_IDS = [
   369,
   642
 ]
+const DELAY = 5 * 60 * 100
+let currentRows = []
 
-$.get('https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs/tim/all',
-  function (data) {
-    const ids = '(' + SIGN_IDS.join(', ') + ')'
-    const query = '/response/tim[id=' + ids + ']/page/line/(left, right)'
-    const signs = $(data).xpath(query)
-    const lines = convertSignsToLines(signs)
-    const rows = R.pipe(
-      R.splitEvery(2),
-      R.map(R.zipObj(['name', 'time']))
-    )(lines)
-    update(rows)
-  }
-)
+getRows()
+window.setInterval(getRows, DELAY)
+
+function getRows() {
+  $.get('https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs/tim/all',
+    function (data) {
+      const ids = '(' + SIGN_IDS.join(', ') + ')'
+      const query = '/response/tim[id=' + ids + ']/page/line/(left, right)'
+      const signs = $(data).xpath(query)
+      const lines = convertSignsToLines(signs)
+      const rows = R.pipe(
+        R.splitEvery(2),
+        R.map(R.zipObj(['name', 'time']))
+      )(lines)
+      console.log(rows)
+      update(rows)
+    }
+  )
+}
 
 /**
  * Converts a NodeList to an [string]
@@ -31,32 +39,37 @@ function convertSignsToLines (signs) {
   )(signs)
 }
 
-function update (rows) {
+function update (newRows) {
   $('.travel-list').empty()
   $('.travel-list').append('<tr>'
     + '<th class="route_col">From AMA to</th>'
     + '<th class="mins_col">Mins</th>'
     + '<th class="trend_col"></th>'
     + '</tr>')
-  const str = R.pipe(
-    R.map(function(item) {
-      return generateRow(item.name, parseInt(item.time, 10) + 5, item.time)
-    }),
-    R.join('')
-    )(rows)
-  $('.travel-list').append(str)
+  if (R.difference(currentRows, newRows)) {
+    render(newRows)
+    currentRows = newRows
+  }
 }
 
-function generateRow (name, previousTime, currentTime) {
+function render(rows) {
+  const formattedRows = rows.map(function(row, key) {
+    return generateRow(row.name, currentRows[key], row.time)
+  }).join('')
+
+  $('.travel-list').append(formattedRows)
+}
+
+function generateRow (name, currentTime, newTime) {
   return '<tr>'
   + '<td class="route_col">' + name + '</td>'
-  + '<td class="mins_col">' + currentTime + '</td>'
-  + '<td class="trend_col">' + getChevron(previousTime, currentTime) + '</td>'
+  + '<td class="mins_col">' + newTime + '</td>'
+  + '<td class="trend_col">' + getChevron(currentTime, newTime) + '</td>'
   + '</tr>'
 }
 
-function getChevron (previousTime, currentTime) {
-  if (previousTime < currentTime) return '<i class="fa fa-chevron-up"></i>'
-  if (previousTime > currentTime) return '<i class="fa fa-chevron-down"></i>'
+function getChevron (currentTime, newTime) {
+  if (currentTime < newTime) return '<i class="fa fa-chevron-up"></i>'
+  if (currentTime > newTime) return '<i class="fa fa-chevron-down"></i>'
   return ''
 }
