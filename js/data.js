@@ -5,8 +5,10 @@ const SIGN_IDS = [
 ]
 
 function getRows(callback) {
-  $.get('https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs/tim/all',
-    function (data) {
+  $.get({
+    url: 'https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs/tim/all',
+    cache: false
+  }, function (data) {
       const ids = '(' + SIGN_IDS.join(', ') + ')'
       const query = '/response/tim[id=' + ids + ']/page/line/(left, right)'
       const signs = $(data).xpath(query)
