@@ -33,6 +33,11 @@ function convertSignsToLines (signs) {
 
 function update (rows) {
   $('.travel-list').empty()
+  $('.travel-list').append('<tr>'
+    + '<th class="route_col">From AMA to</th>'
+    + '<th class="mins_col">Mins</th>'
+    + '<th class="trend_col"></th>'
+    + '</tr>')
   const str = R.pipe(
     R.map(function(item) {
       return generateRow(item.name, parseInt(item.time, 10) + 5, item.time)
