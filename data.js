@@ -17,7 +17,10 @@ function getRows(callback) {
       )(lines)
       callback(rows)
     }
-  )
+  ).fail(function (error) {
+    console.log(error, new Date())
+    $('#loading').html(error.statusText)
+  })
 }
 
 /**
