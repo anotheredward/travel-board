@@ -1,14 +1,16 @@
 /* global $, R */
 
-const DELAY = 5 * 60 * 100
+const DELAY = 30 * 1000
 let currentRows = []
 
-getRows()
-window.setInterval(getRows, DELAY)
+update()
+window.setInterval(update, DELAY)
 
-function update (newRows) {
-  if (!R.equals(currentRows, newRows)) {
-    render(newRows)
-    currentRows = newRows
-  }
+function update () {
+  getRows(function(newRows) {
+    if (!R.equals(currentRows, newRows)) {
+      render(newRows)
+      currentRows = newRows
+    }
+  })
 }

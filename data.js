@@ -4,7 +4,7 @@ const SIGN_IDS = [
   642
 ]
 
-function getRows() {
+function getRows(callback) {
   $.get('https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs/tim/all',
     function (data) {
       const ids = '(' + SIGN_IDS.join(', ') + ')'
@@ -15,9 +15,7 @@ function getRows() {
         R.splitEvery(2),
         R.map(R.zipObj(['name', 'time']))
       )(lines)
-      console.log(rows)
-      console.log(R.difference(currentRows, rows))
-      update(rows)
+      callback(rows)
     }
   )
 }
