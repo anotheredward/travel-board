@@ -40,12 +40,6 @@ function convertSignsToLines (signs) {
 }
 
 function update (newRows) {
-  $('.travel-list').empty()
-  $('.travel-list').append('<tr>'
-    + '<th class="route_col">From AMA to</th>'
-    + '<th class="mins_col">Mins</th>'
-    + '<th class="trend_col"></th>'
-    + '</tr>')
   if (R.difference(currentRows, newRows)) {
     render(newRows)
     currentRows = newRows
@@ -53,6 +47,13 @@ function update (newRows) {
 }
 
 function render(rows) {
+  $('.travel-list').empty()
+  $('.travel-list').append('<tr>'
+    + '<th class="route_col">From AMA to</th>'
+    + '<th class="mins_col">Mins</th>'
+    + '<th class="trend_col"></th>'
+    + '</tr>')
+
   const formattedRows = rows.map(function(row, key) {
     const currentTime = R.path([key, 'time'], currentRows) || row.time
     return generateRow(row.name, currentTime, row.time)
