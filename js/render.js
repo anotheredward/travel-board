@@ -1,6 +1,6 @@
 /* global $, R */
 
-function render(rows) {
+function render(currentRows, newRows) {
   $('.travel-list').empty()
   $('.travel-list').append('<tr>'
     + '<th class="route_col">From AMA to</th>'
@@ -8,7 +8,7 @@ function render(rows) {
     + '<th class="trend_col"></th>'
     + '</tr>')
 
-  const formattedRows = rows.map(function(row, key) {
+  const formattedRows = newRows.map(function(row, key) {
     const currentTime = R.path([key, 'time'], currentRows) || row.time
     return generateRow(row.name, currentTime, row.time)
   }).join('')

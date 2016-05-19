@@ -9,7 +9,7 @@ window.setInterval(update, DELAY)
 function update () {
   getRows(function(newRows) {
     if (!R.equals(currentRows, newRows)) {
-      render(newRows)
+      render(currentRows, newRows)
       currentRows = newRows
     }
   })
