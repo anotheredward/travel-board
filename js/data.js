@@ -21,7 +21,7 @@ function getRows(callback) {
     }
   ).fail(function (error) {
     console.log(error, new Date())
-    $('#loading').html(error.statusText)
+    $('#loading').html("Service Unavailable")
   })
 }
 
