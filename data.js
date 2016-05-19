@@ -1,3 +1,4 @@
+/* global $, R */
 const SIGN_IDS = [
   369,
   642
@@ -20,7 +21,6 @@ function getRows() {
     }
   )
 }
-
 
 /**
  * Converts a NodeList to an [string]

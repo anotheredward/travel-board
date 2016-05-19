@@ -1,3 +1,5 @@
+/* global $, R */
+
 function render(rows) {
   $('.travel-list').empty()
   $('.travel-list').append('<tr>'
