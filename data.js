@@ -1,14 +1,7 @@
-/* global $, R */
-
 const SIGN_IDS = [
   369,
   642
 ]
-const DELAY = 5 * 60 * 100
-let currentRows = []
-
-getRows()
-window.setInterval(getRows, DELAY)
 
 function getRows() {
   $.get('https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs/tim/all',
@@ -28,6 +21,7 @@ function getRows() {
   )
 }
 
+
 /**
  * Converts a NodeList to an [string]
  * @param  {NodeList} signs A list of Nodes containing text
@@ -39,12 +33,3 @@ function convertSignsToLines (signs) {
     R.pluck('innerHTML')
   )(signs)
 }
-
-function update (newRows) {
-  if (!R.equals(currentRows, newRows)) {
-    render(newRows)
-    currentRows = newRows
-  }
-}
-
-
