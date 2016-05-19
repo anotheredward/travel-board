@@ -54,7 +54,8 @@ function update (newRows) {
 
 function render(rows) {
   const formattedRows = rows.map(function(row, key) {
-    return generateRow(row.name, currentRows[key], row.time)
+    const currentTime = R.path([key, 'time'], currentRows) || row.time
+    return generateRow(row.name, currentTime, row.time)
   }).join('')
 
   $('.travel-list').append(formattedRows)
