@@ -40,7 +40,7 @@ function convertSignsToLines (signs) {
 }
 
 function update (newRows) {
-  if (R.difference(currentRows, newRows)) {
+  if (R.difference(currentRows, newRows).length) {
     render(newRows)
     currentRows = newRows
   }
