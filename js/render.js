@@ -3,7 +3,7 @@
 function render(currentRows, newRows) {
   $('.travel-list').empty()
   $('.travel-list').append('<tr>'
-    + '<th class="route_col">From AMA to</th>'
+    + '<th class="route_col">From Ellerslie to</th>'
     + '<th class="mins_col">Mins</th>'
     + '<th class="trend_col"></th>'
     + '</tr>')
