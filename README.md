@@ -18,3 +18,6 @@ Decisions
 
  cons
  History would be shorter, but we'd only have to wait 5 minutes before we had two values for a trend
+ 
+ IE9 minimum
+ Site deployed here: http://mediasuitenz.github.io/travel-board/
