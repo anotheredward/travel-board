@@ -33,6 +33,6 @@ function getRows(callback) {
 function convertSignsToLines (signs) {
   return R.pipe (
     $.makeArray,
-    R.pluck('innerHTML')
+    R.map( function (node) { return node.innerHTML || node.textContent } )
   )(signs)
 }
