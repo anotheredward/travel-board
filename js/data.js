@@ -6,7 +6,7 @@ var SIGN_IDS = [
 
 function getRows(callback) {
   $.get({
-    url: 'https://crossorigin.me/http://trafficnz.info/service/traffic/rest/4/signs/tim/all',
+    url: 'http://msprox.herokuapp.com/?url=http://trafficnz.info/service/traffic/rest/4/signs/tim/all?_=1465340442713',
     cache: false
   }, function (data) {
       var ids = '(' + SIGN_IDS.join(', ') + ')'
