@@ -21,6 +21,8 @@ a:visited {
 }
 .trend_col {
 	padding-right: .5em;
+	width: 10%;
+	max-width: 200px;
 }
 th {
 	font-weight: normal;
@@ -90,4 +92,11 @@ tr:last-child td {
 .unit {
 	font-size: 70%;
 	font-weight: normal;
+}
+
+.trend_col img {
+	display: block;
+	width: 100%;
+	height: auto;
+	min-width: 70px;
 }

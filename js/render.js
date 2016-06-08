@@ -25,7 +25,7 @@ function generateRow (name, currentTime, newTime) {
 }
 
 function getChevron (currentTime, newTime) {
-  if (currentTime < newTime) return '<i class="fa fa-chevron-up"></i>'
-  if (currentTime > newTime) return '<i class="fa fa-chevron-down"></i>'
+  if (currentTime < newTime) return '<img src="images/arrows_0002_up.png"></img>'
+  if (currentTime > newTime) return '<img src="images/arrows_0001_down.png"></img>'
   return ''
 }
